@@ -1,0 +1,4 @@
+repository "Heart-Key@id_loser@cloud.cn"
+  path "/"
+    br "/main"
+    co "/main"
