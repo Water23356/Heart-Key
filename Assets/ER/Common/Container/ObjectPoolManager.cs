@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿// Ignore Spelling: obj Unregister
+
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ER
@@ -96,6 +98,45 @@ namespace ER
             {
                 Debug.LogWarning("对象池不存在：" + poolName);
             }
+        }
+        /// <summary>
+        /// 检查指定对象池是否已经注册
+        /// </summary>
+        /// <param name="poolName"></param>
+        /// <returns></returns>
+        public bool CheckPool(string poolName)
+        {
+            return poolDictionary.ContainsKey(poolName);
+        }
+        /// <summary>
+        /// 创建一个新的对象池,并注册管理
+        /// </summary>
+        /// <param name="poolName">对象池名称</param>
+        /// <param name="obj">使用的预制体</param>
+        /// <param name="count">池默认大小</param>
+        /// <param name="parent">对象池父物体</param>
+        public void CreatePool(string poolName,Water obj,int count = 20,Transform parent = null)
+        {
+            GameObject gobj = new GameObject(poolName);
+            gobj.transform.SetParent(parent);
+            ObjectPool pool = gobj.AddComponent<ObjectPool>();
+            pool.Prefab = obj.gameObject;
+            pool.SetSize(count);
+        }
+        /// <summary>
+        /// 创建一个新的对象池,并注册管理
+        /// </summary>
+        /// <param name="poolName">对象池名称</param>
+        /// <param name="obj">使用的预制体(注意,必须挂载Water脚本)</param>
+        /// <param name="count">池默认大小</param>
+        /// <param name="parent">对象池父物体</param>
+        public void CreatePool(string poolName, GameObject obj, int count = 20, Transform parent = null)
+        {
+            GameObject gobj = new GameObject(poolName);
+            gobj.transform.SetParent(parent);
+            ObjectPool pool = gobj.AddComponent<ObjectPool>();
+            pool.Init(poolName, obj,count);
+            pool.SetSize(count);
         }
 
         #endregion 功能函数

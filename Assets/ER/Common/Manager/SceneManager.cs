@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,7 +11,7 @@ namespace ER
         [Tooltip("目标跳转场景 - 仅编辑器下使用")]
         public string AimScene;
 
-        private Dictionary<string, SceneConfigure> scenes = new();
+        private System.Collections.Generic.Dictionary<string, SceneConfigure> scenes = new();
 
         [Tooltip("跳转至目标场景 - 仅编辑器下使用")]
         [ContextMenu("跳转至场景")]
@@ -46,23 +45,30 @@ namespace ER
                 return;
             }
 
+            Debug.Log("加载场景" + sceneName);
             //异步加载
-            if(asyncLoad)
+            if (asyncLoad)
             {
                 if (transition != null)
                 {
-                    transition.EnterTransition();
+                    transition.EnterTransition(() => { StartCoroutine(LoadSceneAsync(sceneName, transition)); });
                 }
-                StartCoroutine(LoadSceneAsync(sceneName));
+                else
+                {
+                    StartCoroutine(LoadSceneAsync(sceneName, transition));
+                }
             }
             else
             {
                 if(transition != null)
                 {
-                    transition.EnterTransition();
+                    transition.EnterTransition(() => { UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName, LoadSceneMode.Single); });
                 }
-                UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
-                scenes[sceneName].Initialize();
+                else
+                {
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+                    scenes[sceneName].Initialize();
+                }
             }
         }
         /// <summary>
@@ -76,24 +82,29 @@ namespace ER
             {
                 scenes[scene.SceneName] = scene;
             }
-
             //异步加载
             if (asyncLoad)
             {
                 if (transition != null)
                 {
-                    transition.EnterTransition();
+                    transition.EnterTransition(()=> { StartCoroutine(LoadSceneAsync(scene.SceneName, transition)); });
                 }
-                StartCoroutine(LoadSceneAsync(scene.SceneName));
+                else
+                {
+                    StartCoroutine(LoadSceneAsync(scene.SceneName, transition));
+                }
             }
             else
             {
                 if (transition != null)
                 {
-                    transition.EnterTransition();
+                    transition.EnterTransition(() => { UnityEngine.SceneManagement.SceneManager.LoadScene(scene.SceneName, LoadSceneMode.Single); });
                 }
-                UnityEngine.SceneManagement.SceneManager.LoadScene(scene.SceneName, LoadSceneMode.Single);
-                scenes[scene.SceneName].Initialize();
+                else
+                {
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(scene.SceneName, LoadSceneMode.Single);
+                    scenes[scene.SceneName].Initialize();
+                }
             }
         }
 
@@ -112,8 +123,14 @@ namespace ER
                 if(transition != null)
                 {
                     transition.Progress = opt.progress;
-                    yield return null;
+                    yield return 0;
                 }
+                yield return 0;
+            }
+            if (transition != null)
+            {
+                transition.Progress = 1.1f;
+                yield return 0;
             }
             scenes[sceneName].Initialize();
         }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 
 namespace ER
 {
@@ -7,6 +8,7 @@ namespace ER
     /// </summary>
     public abstract class Water : MonoBehaviour
     {
+
         /// <summary>
         /// 所属池子对象
         /// </summary>
@@ -15,7 +17,7 @@ namespace ER
         /// <summary>
         /// 所属池子对象
         /// </summary>
-        public ObjectPool Pool { get; }
+        public ObjectPool Pool { get => pool; set => pool = value; }
 
         /// <summary>
         /// 重置状态

@@ -18,4 +18,30 @@
         /// </summary>
         Parallel
     }
+    /// <summary>
+    /// 4方向枚举
+    /// </summary>
+    public enum Dir4
+    {
+        /// <summary>
+        /// 无方向(错误方向)
+        /// </summary>
+        None,
+        /// <summary>
+        /// 上
+        /// </summary>
+        Up,
+        /// <summary>
+        /// 下
+        /// </summary>
+        Down,
+        /// <summary>
+        /// 左
+        /// </summary>
+        Left,
+        /// <summary>
+        /// 右
+        /// </summary>
+        Right,
+    }
 }
