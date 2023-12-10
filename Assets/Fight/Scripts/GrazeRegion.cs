@@ -9,6 +9,8 @@ public class GrazeRegion:MonoBehaviour
     [SerializeField]
     private FightSystem system;
 
+    public AudioSource audio;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //bug.Log("擦弹进入");
@@ -48,6 +50,7 @@ public class GrazeRegion:MonoBehaviour
         {
             collision.gameObject.tag = GameText.TAG_BULLET_GRAZED;//标记, 防止重复计算
             system.Graze++;
+            audio.Play();
         }
 
     }

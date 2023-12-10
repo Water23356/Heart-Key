@@ -40,6 +40,12 @@ public class FightSystem : MonoControlPanel
     private readonly int[] graze_hp = { 1, 2, 2, 3, 3, 3, 4, 4, 5, 5, 5, 5 };
     private int graze_level_free = 130;
 
+    public AudioClip[] bgms;
+    public AudioClip[] sounds;
+
+    public AudioSource BGM;
+    public AudioSource soundEffects;
+
     [SerializeField]
     private Animator animator;
 
@@ -153,6 +159,10 @@ public class FightSystem : MonoControlPanel
         get => health_player;
         set
         {
+            if(value < health_player)
+            {
+                soundEffects.PlayOneShot(sounds[2]);
+            }
             health_player = value;
             if (health_player > def_health_player * 2)//防止护盾溢出
             {
@@ -305,12 +315,18 @@ public class FightSystem : MonoControlPanel
         {
             case "盖尔":
                 EnemyImage.sprite = boss_1;
+                BGM.clip = bgms[0];
+                BGM.Play();
                 break;
             case "陌生人":
                 EnemyImage.sprite = boss_2;
+                BGM.clip = bgms[1];
+                BGM.Play();
                 break;
             case "妈妈":
                 EnemyImage.sprite = boss_3;
+                BGM.clip = bgms[2];
+                BGM.Play();
                 break;
         }
         eventInfo = fe;
@@ -443,6 +459,7 @@ public class FightSystem : MonoControlPanel
     public void Attack(int hits)
     {
         HPEnemy -= hits * Mathf.Max(0,power-defence_enemy);
+        soundEffects.PlayOneShot(sounds[1]);
     }
     /// <summary>
     /// 玩家受到伤害
@@ -548,6 +565,7 @@ public class FightSystem : MonoControlPanel
                     if (Input.GetButtonDown("Left"))
                     {
                         OptionIndex = Math.Max(0, OptionIndex - 1);
+                        soundEffects.PlayOneShot(sounds[0]);
                     }
                     if (Input.GetButtonDown("Right"))
                     {
@@ -559,6 +577,7 @@ public class FightSystem : MonoControlPanel
                         {
                             OptionIndex = Math.Min(2, OptionIndex + 1);
                         }
+                        soundEffects.PlayOneShot(sounds[0]);
                     }
                     if (Input.GetButtonDown("Submit"))
                     {

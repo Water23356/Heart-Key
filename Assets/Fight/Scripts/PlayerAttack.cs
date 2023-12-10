@@ -23,6 +23,9 @@ public class PlayerAttack : MonoControlPanel
     [SerializeField]
     private PlayerAttackBlock[] attack_blocks;
 
+    public AudioClip[] audios;
+    public AudioSource audioPlayer;
+
     private Dir player_dir;//玩家当前朝向
 
     /// <summary>

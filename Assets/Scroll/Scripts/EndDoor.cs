@@ -9,6 +9,10 @@ public class EndDoor : MonoBehaviour
     private bool over = false;
     public EndPrinter printer;
     public GameObject staff;
+
+    public SpriteRenderer image_back;
+    public SpriteRenderer image_color;
+    public SceneHeart sceneHeart;
     public string[] he =
     {
         "你回到家",
@@ -101,6 +105,7 @@ public class EndDoor : MonoBehaviour
     private void EnterEvent()
     {
         HeartLevel = Heart.Instance.HeartLevel;
+        Heart.Instance.TimerActive = false;
         printer.OpenPanel();
     }
 
@@ -119,19 +124,19 @@ public class EndDoor : MonoBehaviour
                 if (HeartLevel < -10)//低
                 {
                     state = 1;
-                    printer.SetText(be[index], Act);
+                    printer.SetText(be[index] + "\n", Act);
                     index++;
                 }
                 else if (HeartLevel <= 3)//中
                 {
                     state = 2;
-                    printer.SetText(ne[index], Act);
+                    printer.SetText(ne[index] + "\n", Act);
                     index++;
                 }
                 else//高
                 {
                     state = 3;
-                    printer.SetText(he[index], Act);
+                    printer.SetText(he[index]+"\n", Act);
                     index++;
                 }
                 enabled = false;
@@ -185,5 +190,8 @@ public class EndDoor : MonoBehaviour
     private void Staff()
     {
         staff.SetActive(true);
+        image_color.gameObject.SetActive(true);
+        image_back.gameObject.SetActive(true);
+        sceneHeart.enabled = true;
     }
 }

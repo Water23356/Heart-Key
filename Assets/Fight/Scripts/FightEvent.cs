@@ -404,8 +404,8 @@ public static class FightEventStore
         {
             FightEvent fe = new FightEvent();
             fe.name_enemy = "妈妈";
-            fe.heart_kill = new float[6] { 5f, 0f, 3f, -5f, 0f, 10f };//待修改
-            fe.heart_peace = new float[6] { 0f, 5f, -5f, -5f, -3f, 5f };//待修改
+            fe.heart_kill = new float[6] { -5f, 10f, 2f, 5f, -10f, -2f };//待修改
+            fe.heart_peace = new float[6] { 8f, 5f, -2f, 5f, -5f, 2f };//待修改
             fe.get_item = new string[2] { "糖果", string.Empty };//待修改
 
             fe.health_enemy = 36;

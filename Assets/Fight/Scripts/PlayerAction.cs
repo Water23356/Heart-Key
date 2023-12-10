@@ -102,18 +102,22 @@ public class PlayerAction : MonoControlPanel
                 if (Input.GetButtonDown("Left"))
                 {
                     Index = Math.Max(0, Index - 1);
+                    system.soundEffects.PlayOneShot(system.sounds[0]);
                 }
                 if (Input.GetButtonDown("Up"))
                 {
                     Index = Math.Max(0, Index - 2);
+                    system.soundEffects.PlayOneShot(system.sounds[0]);
                 }
                 if (Input.GetButtonDown("Right"))
                 {
                     Index = Math.Min(actions.Count - 1, Index + 1);
+                    system.soundEffects.PlayOneShot(system.sounds[0]);
                 }
                 if (Input.GetButtonDown("Down"))
                 {
                     Index = Math.Min(actions.Count - 1, Index + 2);
+                    system.soundEffects.PlayOneShot(system.sounds[0]);
                 }
                 if (Input.GetButtonDown("Submit"))
                 {

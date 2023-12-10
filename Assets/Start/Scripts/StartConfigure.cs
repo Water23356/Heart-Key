@@ -1,10 +1,12 @@
 ﻿using ER;
 using UnityEngine;
 
-public class StartConfigure:MonoBehaviour
+public class StartConfigure: SceneConfigure
 {
-    private void Start()
+    public string SceneName => "ScrollScene";
+
+    public void Initialize()
     {
-        SceneManager.Instance.AddScene(new ScrollSceneConfigure());
+
     }
 }

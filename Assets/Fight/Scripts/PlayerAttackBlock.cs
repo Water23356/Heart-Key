@@ -70,6 +70,7 @@ public class PlayerAttackBlock : MonoBehaviour
                 if(transform.localPosition.y >= -attack_distance && playerAttack.PlayerDir == Dir.Down)
                 {
                     playerAttack.Hits++;
+                    playerAttack.audioPlayer.PlayOneShot(playerAttack.audios[0]);
                     //Debug.Log($"攻击触发:{gameObject.name}");
                     gameObject.SetActive(false);
                 }
@@ -84,6 +85,7 @@ public class PlayerAttackBlock : MonoBehaviour
                 if (transform.localPosition.y <= attack_distance && playerAttack.PlayerDir == Dir.Up)
                 {
                     playerAttack.Hits++;
+                    playerAttack.audioPlayer.PlayOneShot(playerAttack.audios[0]);
                     //Debug.Log($"攻击触发:{gameObject.name}");
                     gameObject.SetActive(false);
                 }
@@ -98,6 +100,7 @@ public class PlayerAttackBlock : MonoBehaviour
                 if (transform.localPosition.x <= attack_distance && playerAttack.PlayerDir == Dir.Right)
                 {
                     playerAttack.Hits++;
+                    playerAttack.audioPlayer.PlayOneShot(playerAttack.audios[0]);
                     //Debug.Log($"攻击触发:{gameObject.name}");
                     gameObject.SetActive(false);
                 }
@@ -113,6 +116,7 @@ public class PlayerAttackBlock : MonoBehaviour
                 {
                     //Debug.Log($"攻击触发:{gameObject.name}");
                     playerAttack.Hits++;
+                    playerAttack.audioPlayer.PlayOneShot(playerAttack.audios[0]);
                     gameObject.SetActive(false);
                 }
                 if (transform.localPosition.x >= 0)
